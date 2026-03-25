@@ -1,0 +1,99 @@
+{
+    "id": "301e130d-44e1-46ef-8668-67678b35b23e",
+    "task_name": "parking-lot-pathfinding",
+    "trial_name": "parking-lot-pathfinding__Yk3PN8y",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__18-30-52/parking-lot-pathfinding__Yk3PN8y",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "parking-lot-pathfinding"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "46500699ea6815ebe9b8626bdae02d1d1911082c6b9df1540b0bc8b64a306f22",
+    "config": {
+        "task": {
+            "path": "parking-lot-pathfinding",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "parking-lot-pathfinding__Yk3PN8y",
+        "trials_dir": "jobs/2026-03-24__18-30-52",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "cursor-cli",
+            "import_path": null,
+            "model_name": "cursor/composer-2",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "408833ab-e737-4f77-bd4a-2f8dd4954f60"
+    },
+    "agent_info": {
+        "name": "cursor-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "composer-2",
+            "provider": "cursor"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T18:53:41.951189Z",
+    "finished_at": "2026-03-24T18:56:34.054551Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T18:53:41.956059Z",
+        "finished_at": "2026-03-24T18:53:45.675275Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T18:53:45.675282Z",
+        "finished_at": "2026-03-24T18:53:55.823448Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T18:53:55.823476Z",
+        "finished_at": "2026-03-24T18:56:22.818441Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T18:56:22.818508Z",
+        "finished_at": "2026-03-24T18:56:23.379695Z"
+    }
+}

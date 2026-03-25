@@ -1,0 +1,96 @@
+{
+    "id": "699ca56f-a618-40d3-bd55-7d408c57cbe7",
+    "task_name": "publisher-market-analysis",
+    "trial_name": "publisher-market-analysis__hNwmGYW",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/publisher-market-analysis__hNwmGYW",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "publisher-market-analysis"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "4da9e82de9eac75acf73c02e748bad0bf46810e66d7bd292082b0cfb8f6ad627",
+    "config": {
+        "task": {
+            "path": "publisher-market-analysis",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "publisher-market-analysis__hNwmGYW",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T18:02:43.064490Z",
+    "finished_at": "2026-03-24T18:03:13.060280Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T18:02:43.084041Z",
+        "finished_at": "2026-03-24T18:02:53.206603Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T18:02:53.206615Z",
+        "finished_at": "2026-03-24T18:02:53.206659Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T18:02:53.206698Z",
+        "finished_at": "2026-03-24T18:02:53.759340Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T18:02:53.759459Z",
+        "finished_at": "2026-03-24T18:03:00.693746Z"
+    }
+}

@@ -1,0 +1,96 @@
+{
+    "id": "24e3ba3c-7d6a-4266-a35c-0b5846d97190",
+    "task_name": "rsa-jwt-token-api-redis-blacklist",
+    "trial_name": "rsa-jwt-token-api-redis-blacklis__wVnVWmE",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/rsa-jwt-token-api-redis-blacklis__wVnVWmE",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "rsa-jwt-token-api-redis-blacklist"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "274b89a9450b2fadcff40a3e0ce1d5511a95cde4131ce4c7e6a63439668d8083",
+    "config": {
+        "task": {
+            "path": "rsa-jwt-token-api-redis-blacklist",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "rsa-jwt-token-api-redis-blacklis__wVnVWmE",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T17:59:38.835160Z",
+    "finished_at": "2026-03-24T18:01:12.561502Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T17:59:38.841480Z",
+        "finished_at": "2026-03-24T18:00:17.510837Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T18:00:17.510847Z",
+        "finished_at": "2026-03-24T18:00:17.510905Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T18:00:17.510948Z",
+        "finished_at": "2026-03-24T18:00:19.171127Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T18:00:19.171243Z",
+        "finished_at": "2026-03-24T18:01:01.200402Z"
+    }
+}

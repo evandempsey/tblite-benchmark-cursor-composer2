@@ -1,0 +1,99 @@
+{
+    "id": "ac192429-f989-4248-8557-383b97b3743c",
+    "task_name": "industrial-kiln-controller",
+    "trial_name": "industrial-kiln-controller__SzbwnRt",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__18-30-52/industrial-kiln-controller__SzbwnRt",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "industrial-kiln-controller"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "a45a0b32726b970a90c4dfa804429083525295022464e5b3227030579fb5d694",
+    "config": {
+        "task": {
+            "path": "industrial-kiln-controller",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "industrial-kiln-controller__SzbwnRt",
+        "trials_dir": "jobs/2026-03-24__18-30-52",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "cursor-cli",
+            "import_path": null,
+            "model_name": "cursor/composer-2",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "408833ab-e737-4f77-bd4a-2f8dd4954f60"
+    },
+    "agent_info": {
+        "name": "cursor-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "composer-2",
+            "provider": "cursor"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T19:21:23.489229Z",
+    "finished_at": "2026-03-24T19:28:41.331265Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T19:21:23.492659Z",
+        "finished_at": "2026-03-24T19:21:32.229715Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T19:21:32.229724Z",
+        "finished_at": "2026-03-24T19:21:50.249223Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T19:21:50.249252Z",
+        "finished_at": "2026-03-24T19:28:22.377109Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T19:28:22.377176Z",
+        "finished_at": "2026-03-24T19:28:30.307404Z"
+    }
+}

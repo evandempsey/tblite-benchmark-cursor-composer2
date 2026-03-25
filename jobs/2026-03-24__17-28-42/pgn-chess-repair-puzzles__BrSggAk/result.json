@@ -1,0 +1,96 @@
+{
+    "id": "44792e8e-66b4-4965-bd81-5b5fa8d1d453",
+    "task_name": "pgn-chess-repair-puzzles",
+    "trial_name": "pgn-chess-repair-puzzles__BrSggAk",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/pgn-chess-repair-puzzles__BrSggAk",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "pgn-chess-repair-puzzles"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "20e3e9cb5795143a2332b9ca3a9cc8548ecc5d61fe56ba7e6ffaa591e41b8dbf",
+    "config": {
+        "task": {
+            "path": "pgn-chess-repair-puzzles",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "pgn-chess-repair-puzzles__BrSggAk",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T17:46:18.611776Z",
+    "finished_at": "2026-03-24T17:47:02.368517Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T17:46:18.622595Z",
+        "finished_at": "2026-03-24T17:46:49.434943Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T17:46:49.434952Z",
+        "finished_at": "2026-03-24T17:46:49.434982Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T17:46:49.435005Z",
+        "finished_at": "2026-03-24T17:46:50.066488Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T17:46:50.066566Z",
+        "finished_at": "2026-03-24T17:46:51.254661Z"
+    }
+}

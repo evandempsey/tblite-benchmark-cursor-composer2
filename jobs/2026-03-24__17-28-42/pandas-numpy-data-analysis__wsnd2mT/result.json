@@ -1,0 +1,96 @@
+{
+    "id": "a23b495d-80f1-4f60-84ff-ba963bb5d4be",
+    "task_name": "pandas-numpy-data-analysis",
+    "trial_name": "pandas-numpy-data-analysis__wsnd2mT",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/pandas-numpy-data-analysis__wsnd2mT",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "pandas-numpy-data-analysis"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "74309278a755dbebecedc516d779b109cd5777cf93be3afaff024ef4869494e0",
+    "config": {
+        "task": {
+            "path": "pandas-numpy-data-analysis",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "pandas-numpy-data-analysis__wsnd2mT",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T17:49:40.210086Z",
+    "finished_at": "2026-03-24T17:50:27.453647Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T17:49:40.228930Z",
+        "finished_at": "2026-03-24T17:50:14.223713Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T17:50:14.223725Z",
+        "finished_at": "2026-03-24T17:50:14.223767Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T17:50:14.223798Z",
+        "finished_at": "2026-03-24T17:50:14.512057Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T17:50:14.512163Z",
+        "finished_at": "2026-03-24T17:50:15.732324Z"
+    }
+}

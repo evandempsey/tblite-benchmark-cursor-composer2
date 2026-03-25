@@ -9,8 +9,10 @@ wheels/
 # Virtual environments
 .venv
 
-# Benchmark output data (large)
-jobs/
+# Benchmark output data (large) — only include result.json files
+jobs/**/*
+!jobs/**/result.json
+!jobs/**/
 
 # Claude workspace
 .claude/

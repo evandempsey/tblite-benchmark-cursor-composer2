@@ -1,0 +1,99 @@
+{
+    "id": "0bbc428b-6f95-497d-9458-aaa8532ea631",
+    "task_name": "word-derangement-mapping",
+    "trial_name": "word-derangement-mapping__5y3CCYE",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__18-30-52/word-derangement-mapping__5y3CCYE",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "word-derangement-mapping"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "79cc0bc76160ebc18f852b71fa7e3c21e3dc55b63bb9b413883ac3e3b941c7ea",
+    "config": {
+        "task": {
+            "path": "word-derangement-mapping",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "word-derangement-mapping__5y3CCYE",
+        "trials_dir": "jobs/2026-03-24__18-30-52",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "cursor-cli",
+            "import_path": null,
+            "model_name": "cursor/composer-2",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "408833ab-e737-4f77-bd4a-2f8dd4954f60"
+    },
+    "agent_info": {
+        "name": "cursor-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "composer-2",
+            "provider": "cursor"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T20:18:02.268325Z",
+    "finished_at": "2026-03-24T20:24:46.111235Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T20:18:02.276509Z",
+        "finished_at": "2026-03-24T20:18:15.942409Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T20:18:15.942418Z",
+        "finished_at": "2026-03-24T20:18:31.854155Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T20:18:31.854192Z",
+        "finished_at": "2026-03-24T20:24:34.589492Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T20:24:34.589545Z",
+        "finished_at": "2026-03-24T20:24:35.061300Z"
+    }
+}

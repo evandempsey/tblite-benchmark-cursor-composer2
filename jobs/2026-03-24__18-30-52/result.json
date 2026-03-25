@@ -1,0 +1,148 @@
+{
+    "id": "408833ab-e737-4f77-bd4a-2f8dd4954f60",
+    "started_at": "2026-03-24T18:30:55.272769",
+    "finished_at": "2026-03-24T21:05:41.253475",
+    "n_total_trials": 100,
+    "stats": {
+        "n_trials": 100,
+        "n_errors": 5,
+        "evals": {
+            "cursor-cli__composer-2__openthoughts-tblite": {
+                "n_trials": 100,
+                "n_errors": 5,
+                "metrics": [
+                    {
+                        "mean": 0.8008210505698006
+                    }
+                ],
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "systemd-log-monitoring__ApVXFhp",
+                            "protein-sequence__7Nm9E5m",
+                            "iot-device-registration-server__5ETZJdL",
+                            "sales-data-csv-analysis__RpCtktZ",
+                            "build-merkle-tree-cli-sha512__y8YF8w5",
+                            "application-debug__HEgnvrp",
+                            "california-housing-api__vcyy7H2",
+                            "build-system-task-ordering__M9TiLi4",
+                            "smiles-data-lab__ptttbfJ",
+                            "neural-architecture-search-final__j7DkaUg",
+                            "git-repo-forensics__wTaoj8p",
+                            "vimscript-vim-quine__GhgRNWn",
+                            "bandit-delayed-feedback__TnvpVWg",
+                            "bloom-filter-cache-penetration-p__3G6Vz9V",
+                            "rsa-jwt-token-api-redis-blacklis__HdA2KUP",
+                            "python-api-rate-limit__po8tbwt",
+                            "breast-cancer-mlflow__tfZeg7Z",
+                            "etl_checkpoint_resume_bug__tfhrokr",
+                            "token-auth-websocket__AGTdQDY"
+                        ],
+                        "1.0": [
+                            "basic-message-queue__Q8LWR5r",
+                            "mlflow-register__ehTeihD",
+                            "cpp-daemon-sighup-segfault__a9FWKmD",
+                            "book-portfolio-analysis__jbFr544",
+                            "todos-api__AahqbSu",
+                            "reproducibility-and-envsetup__j5VQD8t",
+                            "maven-slf4j-conflict__6wEP7n5",
+                            "anomaly-detection-ranking__3cJHtrE",
+                            "submission_a63937a5_20251224_152__Bh3z5Ww",
+                            "supply-chain-fulfillment__6awr49d",
+                            "csv-json-jsonl-merger__nT37Edy",
+                            "sakila-sqlite-queries__DuTDwGu",
+                            "pdf-table-parsing__rgrwDBn",
+                            "parking-lot-pathfinding__Yk3PN8y",
+                            "cryptographic-protocol-verifier__SPk2dy7",
+                            "convolutional-layers__dJK26mH",
+                            "broken-python__y2t6f2o",
+                            "amuse-install__fyFJChz",
+                            "grpc-plant-position-server__zmsjFgR",
+                            "multi-server-configuration__Lxr5jjr",
+                            "ekf-localization__LXXbzA7",
+                            "permutation-construction-100k__uicTDee",
+                            "symlink-chain-traversal__NLzKkd7",
+                            "log-summary__eVWmgxw",
+                            "acl-permissions-inheritance__MYXiL9N",
+                            "service-deployment-wave-planner__DCM54R4",
+                            "jsonl-aggregator__Bh2M3Sv",
+                            "server-log-analysis__X7fchom",
+                            "grid-pathfinding__iNshAXW",
+                            "db-migration-local-storage__ozTNUfR",
+                            "industrial-kiln-controller__SzbwnRt",
+                            "schedule-vacation__c2tamYP",
+                            "api-endpoint-permission-canonica__bqehHH7",
+                            "battery-charging-optimization__cqs4wS6",
+                            "pandas-etl__CPH7yHL",
+                            "bracket-sequence-restoration__XjJVazf",
+                            "pandas-numpy-data-analysis__RcWkskm",
+                            "html-index-analysis__WDKscWf",
+                            "react-typescript-debugg__bi8WkeF",
+                            "competitive-programming-solver__DCtf6vL",
+                            "jq-data-processing__pFT2rwT",
+                            "neutron-submission__pQUiLwb",
+                            "auth_token_race_condition__Mf6SiNZ",
+                            "okhttp-trailers-crash__vZgFGRA",
+                            "malicious-package-forensics__AVbCNJY",
+                            "distributed-test-execution-sched__kHJW4JT",
+                            "container-registry-optimization__b2PkUBs",
+                            "hydra-debug-slurm-mode__k9XnQVA",
+                            "sign-vector-game__nngiU8C",
+                            "scan-linux-persistence-artifacts__AJqYiec",
+                            "publisher-market-analysis-v2__9s2MhfV",
+                            "word-derangement-mapping__5y3CCYE",
+                            "legal-summary-extraction__QaPi6H6",
+                            "chained-forensic-extraction_2026__6JYXeJm",
+                            "mtls-cert-rotation__KtYsQHb",
+                            "network-log-normalization__cQBSXyA",
+                            "multi-labeller__TDmZDsH",
+                            "playing-card-recognition__M42v8s3",
+                            "simple-database-query-tool__yBn4Abo",
+                            "publisher-market-analysis__RWmoWRo",
+                            "raft-log-repair-concurrent-acces__aoWoCTd",
+                            "reverse-engineer-stack-vm__ukfPjZB",
+                            "game-of-stones__AKw4DiT",
+                            "prediction-model-evaluation__X2hLfcg",
+                            "floor-plan-geometry__UTHrPbe",
+                            "iris-dataset-classification__Ymkt9Dq",
+                            "sympy-bug-fix__r5Sjjb9",
+                            "mech-system__u4C3t7R",
+                            "sql-injection-forensics__hSo4yRd",
+                            "task-xxe-exploit__bQvtsRv",
+                            "cosign-keyless-signing__mwrWLK6",
+                            "fix_async_worker_queue__8CPtWRu",
+                            "corrupted-filesystem-recovery__sZb47iU",
+                            "image-tile-identification__3jNpHVc",
+                            "monorepo-changelog-cli__aRNmR4t",
+                            "fix-js-network-controller__3ZVz3HS"
+                        ],
+                        "0.8269800569800568": [
+                            "bash-log-processor-fix__7a9r6hN"
+                        ],
+                        "0.882": [
+                            "security-incident-log-analysis__dvZpWgm"
+                        ],
+                        "0.7833333333333333": [
+                            "security-breach-incident-respons__ZzAWwMA"
+                        ],
+                        "0.76": [
+                            "pgn-chess-repair-puzzles__5GkHerf"
+                        ],
+                        "0.8297916666666667": [
+                            "tsl-test-case-generation__UCbaeUw"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "todos-api__AahqbSu",
+                        "neural-architecture-search-final__j7DkaUg",
+                        "distributed-test-execution-sched__kHJW4JT",
+                        "scan-linux-persistence-artifacts__AJqYiec",
+                        "reverse-engineer-stack-vm__ukfPjZB"
+                    ]
+                }
+            }
+        }
+    }
+}

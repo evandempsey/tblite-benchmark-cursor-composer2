@@ -1,0 +1,96 @@
+{
+    "id": "6c414118-0156-4c16-8eaa-f0feca9f3dcc",
+    "task_name": "parking-lot-pathfinding",
+    "trial_name": "parking-lot-pathfinding__qDWKm4j",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/parking-lot-pathfinding__qDWKm4j",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "parking-lot-pathfinding"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "46500699ea6815ebe9b8626bdae02d1d1911082c6b9df1540b0bc8b64a306f22",
+    "config": {
+        "task": {
+            "path": "parking-lot-pathfinding",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "parking-lot-pathfinding__qDWKm4j",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T17:39:20.290005Z",
+    "finished_at": "2026-03-24T17:39:39.936289Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T17:39:20.303435Z",
+        "finished_at": "2026-03-24T17:39:28.716985Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T17:39:28.716992Z",
+        "finished_at": "2026-03-24T17:39:28.717018Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T17:39:28.717039Z",
+        "finished_at": "2026-03-24T17:39:28.873440Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T17:39:28.873509Z",
+        "finished_at": "2026-03-24T17:39:29.378887Z"
+    }
+}

@@ -1,0 +1,96 @@
+{
+    "id": "02408f71-824f-4b7d-b437-dbd06637d5a6",
+    "task_name": "mech-system",
+    "trial_name": "mech-system__ScWEpQ2",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__17-28-42/mech-system__ScWEpQ2",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "mech-system"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "70b12652e7db6e648c0a414cc752cd839a08f3be30a5fa176f8463f361ba7d09",
+    "config": {
+        "task": {
+            "path": "mech-system",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "mech-system__ScWEpQ2",
+        "trials_dir": "jobs/2026-03-24__17-28-42",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "443e514e-47d2-43f1-a589-5e2ce7ff41ca"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T18:08:54.716862Z",
+    "finished_at": "2026-03-24T18:09:39.926188Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T18:08:54.721358Z",
+        "finished_at": "2026-03-24T18:09:06.030802Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T18:09:06.030817Z",
+        "finished_at": "2026-03-24T18:09:06.030869Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T18:09:06.030932Z",
+        "finished_at": "2026-03-24T18:09:07.526373Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T18:09:07.526506Z",
+        "finished_at": "2026-03-24T18:09:28.581977Z"
+    }
+}

@@ -1,0 +1,99 @@
+{
+    "id": "e6e7c3e8-3105-4122-bd9d-2a893e96f5f2",
+    "task_name": "corrupted-filesystem-recovery",
+    "trial_name": "corrupted-filesystem-recovery__sZb47iU",
+    "trial_uri": "file:///home/evandempsey/git/composer-2-tblite/jobs/2026-03-24__18-30-52/corrupted-filesystem-recovery__sZb47iU",
+    "task_id": {
+        "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+        "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+        "path": "corrupted-filesystem-recovery"
+    },
+    "source": "openthoughts-tblite",
+    "task_checksum": "49f077bc241a69496c37f0a02da94a789bbdc22750ba987098d152ddc3db0e8c",
+    "config": {
+        "task": {
+            "path": "corrupted-filesystem-recovery",
+            "git_url": "https://github.com/open-thoughts/OpenThoughts-TBLite.git",
+            "git_commit_id": "f075e463472c7790b85793b392dff1fff20cc0e3",
+            "overwrite": false,
+            "download_dir": null,
+            "source": "openthoughts-tblite"
+        },
+        "trial_name": "corrupted-filesystem-recovery__sZb47iU",
+        "trials_dir": "jobs/2026-03-24__18-30-52",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "cursor-cli",
+            "import_path": null,
+            "model_name": "cursor/composer-2",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "408833ab-e737-4f77-bd4a-2f8dd4954f60"
+    },
+    "agent_info": {
+        "name": "cursor-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "composer-2",
+            "provider": "cursor"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-03-24T20:52:54.046757Z",
+    "finished_at": "2026-03-24T20:54:48.299860Z",
+    "environment_setup": {
+        "started_at": "2026-03-24T20:52:54.096424Z",
+        "finished_at": "2026-03-24T20:52:58.401761Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-03-24T20:52:58.401783Z",
+        "finished_at": "2026-03-24T20:53:10.839322Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-03-24T20:53:10.839353Z",
+        "finished_at": "2026-03-24T20:54:36.974705Z"
+    },
+    "verifier": {
+        "started_at": "2026-03-24T20:54:36.974763Z",
+        "finished_at": "2026-03-24T20:54:37.487688Z"
+    }
+}
