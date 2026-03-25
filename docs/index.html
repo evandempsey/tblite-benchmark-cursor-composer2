@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composer 2 on OpenThoughts-TBLite</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep: #0a0b0f;
+  --bg-card: #12141a;
+  --bg-card-hover: #181b24;
+  --border: #1e2230;
+  --border-light: #2a2f40;
+  --text-primary: #e8eaf0;
+  --text-secondary: #8890a4;
+  --text-muted: #555d73;
+  --accent: #00e5c8;
+  --accent-dim: #00e5c820;
+  --accent-glow: #00e5c840;
+  --green: #22c55e;
+  --green-dim: #22c55e20;
+  --amber: #f59e0b;
+  --amber-dim: #f59e0b20;
+  --red: #ef4444;
+  --red-dim: #ef444420;
+  --gray: #6b7280;
+  --gray-dim: #6b728020;
+  --mono: 'IBM Plex Mono', 'Menlo', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  background: #0a0b0fdd;
+}
+
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+nav .logo {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+nav .nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav .nav-links a:hover { color: var(--text-primary); }
+
+/* ── HERO ── */
+.hero {
+  padding: 80px 0 64px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.hero-score {
+  font-family: var(--mono);
+  font-size: clamp(72px, 12vw, 120px);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.04em;
+}
+
+.hero-score .pct {
+  font-size: 0.5em;
+  color: var(--accent);
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.hero-model {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.hero-dataset {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-value {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ── LEADERBOARD ── */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lb-row {
+  display: grid;
+  grid-template-columns: 40px 200px 1fr 70px;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.lb-row:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+}
+
+.lb-row.ours {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent-dim), var(--bg-card));
+  box-shadow: 0 0 20px var(--accent-dim);
+}
+
+.lb-rank {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.lb-row.ours .lb-rank { color: var(--accent); }
+
+.lb-model {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-model .agent-note {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
+.lb-bar-wrap {
+  height: 28px;
+  background: #0d0e13;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.lb-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2a2f40, #3a4060);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lb-row.ours .lb-bar {
+  background: linear-gradient(90deg, #00e5c830, #00e5c860);
+}
+
+.lb-score {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.lb-row.ours .lb-score { color: var(--accent); }
+
+.lb-caveat {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+.lb-caveat strong { color: var(--text-secondary); }
+
+/* ── DISTRIBUTION ── */
+.dist-container {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dist-bar-wrap {
+  flex: 1;
+  min-width: 300px;
+}
+
+.dist-bar {
+  display: flex;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.dist-segment {
+  transition: flex 0.6s ease;
+  position: relative;
+  cursor: default;
+}
+
+.dist-segment[data-type="perfect"] { background: var(--green); }
+.dist-segment[data-type="partial"] { background: var(--amber); }
+.dist-segment[data-type="zero"] { background: var(--red); }
+.dist-segment[data-type="error"] { background: var(--gray); }
+
+.dist-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px;
+}
+
+.dist-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.dist-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.dist-dot.perfect { background: var(--green); }
+.dist-dot.partial { background: var(--amber); }
+.dist-dot.zero { background: var(--red); }
+.dist-dot.error { background: var(--gray); }
+
+.dist-legend-value {
+  font-family: var(--mono);
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* ── STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.stat-card-value {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-card-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+}
+
+/* ── TABLE ── */
+.table-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-btn:hover {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.results-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.results-table thead {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+
+.results-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.results-table th:hover { color: var(--text-secondary); }
+
+.results-table th .sort-arrow {
+  margin-left: 4px;
+  opacity: 0.3;
+}
+
+.results-table th.sorted .sort-arrow { opacity: 1; color: var(--accent); }
+
+.results-table td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.results-table tbody tr {
+  transition: background 0.1s;
+}
+
+.results-table tbody tr:hover { background: var(--bg-card-hover); }
+
+.task-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.score-cell {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.score-cell.perfect { color: var(--green); }
+.score-cell.partial { color: var(--amber); }
+.score-cell.zero { color: var(--red); }
+.score-cell.null { color: var(--text-muted); }
+
+.time-cell {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-pass { background: var(--green-dim); color: var(--green); }
+.badge-fail { background: var(--red-dim); color: var(--red); }
+.badge-partial { background: var(--amber-dim); color: var(--amber); }
+.badge-error { background: var(--gray-dim); color: var(--gray); }
+
+.note-cell {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── METHODOLOGY ── */
+.method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.method-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.method-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.method-value {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.method-value code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: #0d0e13;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+.caveats {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+}
+
+.caveats-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.caveats ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.caveats li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+
+.caveats li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  text-align: center;
+}
+
+footer .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 16px;
+}
+
+footer a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+footer a:hover { color: var(--accent); }
+
+footer .footer-note {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { padding: 48px 0 40px; }
+  .hero-stats { gap: 24px; }
+  .lb-row { grid-template-columns: 30px 1fr 60px; }
+  .lb-bar-wrap { display: none; }
+  .method-grid { grid-template-columns: 1fr; }
+  .dist-container { flex-direction: column; }
+  nav .nav-links { gap: 16px; }
+  nav .nav-links a { font-size: 12px; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">composer-2-tblite</div>
+    <ul class="nav-links">
+      <li><a href="#leaderboard">Leaderboard</a></li>
+      <li><a href="#distribution">Distribution</a></li>
+      <li><a href="#tasks">Tasks</a></li>
+      <li><a href="#timing">Timing</a></li>
+      <li><a href="#methodology">Methodology</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-label animate-in">OpenThoughts-TBLite Benchmark</div>
+    <div class="hero-score animate-in delay-1" id="hero-score"></div>
+    <div class="hero-model animate-in delay-2" id="hero-model"></div>
+    <div class="hero-dataset animate-in delay-2" id="hero-dataset"></div>
+    <div class="hero-stats animate-in delay-3" id="hero-stats"></div>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="leaderboard">
+    <div class="section-header">
+      <h2 class="section-title">Leaderboard Comparison</h2>
+      <p class="section-subtitle">OpenThoughts-TBLite scores compared to published results</p>
+    </div>
+    <div class="leaderboard-list" id="leaderboard-list"></div>
+    <div class="lb-caveat">
+      <strong>Note:</strong> Published leaderboard models were evaluated using the <code style="font-family:var(--mono);background:#0d0e13;padding:2px 5px;border-radius:3px;color:var(--accent)">terminus-2</code> agent harness.
+      Our Composer 2 result uses the <code style="font-family:var(--mono);background:#0d0e13;padding:2px 5px;border-radius:3px;color:var(--accent)">cursor-cli</code> agent.
+      Different agent harnesses may affect scores, so direct comparison should be interpreted with caution.
+    </div>
+  </section>
+
+  <section id="distribution">
+    <div class="section-header">
+      <h2 class="section-title">Score Distribution</h2>
+      <p class="section-subtitle">Breakdown of task outcomes across 100 tasks</p>
+    </div>
+    <div class="dist-container" id="dist-container"></div>
+  </section>
+
+  <section id="timing">
+    <div class="section-header">
+      <h2 class="section-title">Agent Execution Time</h2>
+      <p class="section-subtitle">Time spent by Composer 2 solving each task</p>
+    </div>
+    <div class="stats-grid" id="timing-grid"></div>
+  </section>
+
+  <section id="tasks">
+    <div class="section-header">
+      <h2 class="section-title">Task-by-Task Results</h2>
+      <p class="section-subtitle">All 100 tasks with scores, status, and execution time</p>
+    </div>
+    <div class="table-controls" id="table-controls"></div>
+    <div class="results-table-wrap">
+      <table class="results-table">
+        <thead id="table-head"></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="methodology">
+    <div class="section-header">
+      <h2 class="section-title">Methodology</h2>
+    </div>
+    <div class="method-grid" id="method-grid"></div>
+    <div class="caveats">
+      <div class="caveats-title">Caveats</div>
+      <ul>
+        <li>Single run per task (no multi-attempt averaging); results may vary with repeated runs</li>
+        <li>Local Docker execution; networking and resource constraints may differ from Daytona cloud sandboxes used for official leaderboard</li>
+        <li>Uses <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">cursor-cli</code> agent harness, not <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">terminus-2</code> used for published leaderboard scores</li>
+        <li>5 tasks timed out and are excluded from the mean score, which may slightly inflate the reported result</li>
+        <li>Oracle baseline achieves only 62.2% mean due to 26 missing oracle solutions and some buggy oracle scripts</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://harborframework.com" target="_blank" rel="noopener">Harbor Framework</a>
+      <a href="https://github.com/open-thoughts/OpenThoughts-TBLite" target="_blank" rel="noopener">OpenThoughts-TBLite</a>
+      <a href="https://tbench.ai" target="_blank" rel="noopener">Terminal-Bench</a>
+      <a href="https://cursor.com/blog/composer-2" target="_blank" rel="noopener">Composer 2</a>
+    </div>
+    <div class="footer-note">Benchmark run on March 24, 2026 using Harbor v0.1.45 with local Docker execution</div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const data = {"summary":{"model":"Cursor Composer 2","dataset":"OpenThoughts-TBLite","framework":"Harbor v0.1.45","total_tasks":100,"scored":95,"errors":5,"mean_reward":0.8009,"median_reward":1.0,"std_dev":0.3915,"perfect":72,"partial":5,"zero":18,"pass_rate":81.1,"agent_solved_count":33,"regression_count":14,"timing":{"min":37.2,"p50":223.5,"p90":541.0,"p95":873.7,"max":2175.9,"mean":291.7}},"leaderboard":[{"model":"Cursor Composer 2","tblite":80.1,"tb2":61.7,"ours":true,"note":"cursor-cli agent"},{"model":"Kimi-K2.5","tblite":75.1,"tb2":35.2,"ours":false,"note":"terminus-2 agent"},{"model":"GLM-4.7","tblite":67.7,"tb2":35.2,"ours":false,"note":"terminus-2 agent"},{"model":"Claude Haiku 4.5","tblite":64.4,"tb2":28.3,"ours":false,"note":"terminus-2 agent"},{"model":"GPT-5-mini","tblite":50.5,"tb2":24.9,"ours":false,"note":"terminus-2 agent"},{"model":"Qwen3-Coder-480B","tblite":42.1,"tb2":26.6,"ours":false,"note":"terminus-2 agent"},{"model":"Qwen3-235B","tblite":37.0,"tb2":14.6,"ours":false,"note":"terminus-2 agent"},{"model":"Nemotron-3-Nano-30B","tblite":21.5,"tb2":9.5,"ours":false,"note":"terminus-2 agent"}],"tasks":[{"name":"acl-permissions-inheritance","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":71.8,"error_type":null},{"name":"amuse-install","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":275.4,"error_type":null},{"name":"anomaly-detection-ranking","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":106.3,"error_type":null},{"name":"api-endpoint-permission-canonicalizer","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":137.0,"error_type":null},{"name":"application-debug","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":122.9,"error_type":null},{"name":"auth_token_race_condition","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":109.2,"error_type":null},{"name":"bandit-delayed-feedback","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":896.9,"error_type":null},{"name":"bash-log-processor-fix","composer2":0.827,"oracle":0.605,"status":"partial","note":"","exec_time_secs":385.7,"error_type":null},{"name":"basic-message-queue","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":188.8,"error_type":null},{"name":"battery-charging-optimization","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":87.6,"error_type":null},{"name":"bloom-filter-cache-penetration-prevention","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":567.7,"error_type":null},{"name":"book-portfolio-analysis","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":462.0,"error_type":null},{"name":"bracket-sequence-restoration","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":2175.9,"error_type":null},{"name":"breast-cancer-mlflow","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":466.5,"error_type":null},{"name":"broken-python","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":68.9,"error_type":null},{"name":"build-merkle-tree-cli-sha512","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":282.7,"error_type":null},{"name":"build-system-task-ordering","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":837.6,"error_type":null},{"name":"california-housing-api","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":385.2,"error_type":null},{"name":"chained-forensic-extraction_20260101_011957","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":130.4,"error_type":null},{"name":"competitive-programming-solver","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":196.7,"error_type":null},{"name":"container-registry-optimization","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":161.4,"error_type":null},{"name":"convolutional-layers","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":223.2,"error_type":null},{"name":"corrupted-filesystem-recovery","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":86.1,"error_type":null},{"name":"cosign-keyless-signing","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":297.5,"error_type":null},{"name":"cpp-daemon-sighup-segfault","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":294.8,"error_type":null},{"name":"cryptographic-protocol-verifier","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":287.3,"error_type":null},{"name":"csv-json-jsonl-merger","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":88.7,"error_type":null},{"name":"db-migration-local-storage","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":203.8,"error_type":null},{"name":"distributed-test-execution-scheduler","composer2":null,"oracle":1.0,"status":"error","note":"","exec_time_secs":1200.0,"error_type":"AgentTimeoutError"},{"name":"ekf-localization","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":196.4,"error_type":null},{"name":"etl_checkpoint_resume_bug","composer2":0.0,"oracle":0.0,"status":"fail","note":"","exec_time_secs":37.2,"error_type":null},{"name":"fix-js-network-controller","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":238.9,"error_type":null},{"name":"fix_async_worker_queue","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":91.4,"error_type":null},{"name":"floor-plan-geometry","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":346.1,"error_type":null},{"name":"game-of-stones","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":282.9,"error_type":null},{"name":"git-repo-forensics","composer2":0.0,"oracle":0.0,"status":"fail","note":"","exec_time_secs":276.2,"error_type":null},{"name":"grid-pathfinding","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":932.0,"error_type":null},{"name":"grpc-plant-position-server","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":75.0,"error_type":null},{"name":"html-index-analysis","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":111.9,"error_type":null},{"name":"hydra-debug-slurm-mode","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":171.1,"error_type":null},{"name":"image-tile-identification","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":204.3,"error_type":null},{"name":"industrial-kiln-controller","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":392.1,"error_type":null},{"name":"iot-device-registration-server","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":260.4,"error_type":null},{"name":"iris-dataset-classification","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":152.0,"error_type":null},{"name":"jq-data-processing","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":82.5,"error_type":null},{"name":"jsonl-aggregator","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":50.6,"error_type":null},{"name":"legal-summary-extraction","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":164.8,"error_type":null},{"name":"log-summary","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":62.8,"error_type":null},{"name":"malicious-package-forensics","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":223.5,"error_type":null},{"name":"maven-slf4j-conflict","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":380.7,"error_type":null},{"name":"mech-system","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":382.9,"error_type":null},{"name":"mlflow-register","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":106.2,"error_type":null},{"name":"monorepo-changelog-cli","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":290.7,"error_type":null},{"name":"mtls-cert-rotation","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":217.9,"error_type":null},{"name":"multi-labeller","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":429.9,"error_type":null},{"name":"multi-server-configuration","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":117.7,"error_type":null},{"name":"network-log-normalization","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":96.1,"error_type":null},{"name":"neural-architecture-search-final","composer2":null,"oracle":1.0,"status":"error","note":"","exec_time_secs":800.1,"error_type":"AgentTimeoutError"},{"name":"neutron-submission","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":728.1,"error_type":null},{"name":"okhttp-trailers-crash","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":312.9,"error_type":null},{"name":"pandas-etl","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":116.4,"error_type":null},{"name":"pandas-numpy-data-analysis","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":192.8,"error_type":null},{"name":"parking-lot-pathfinding","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":147.0,"error_type":null},{"name":"pdf-table-parsing","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":152.0,"error_type":null},{"name":"permutation-construction-100k","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":266.4,"error_type":null},{"name":"pgn-chess-repair-puzzles","composer2":0.76,"oracle":1.0,"status":"partial","note":"","exec_time_secs":980.0,"error_type":null},{"name":"playing-card-recognition","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":207.6,"error_type":null},{"name":"prediction-model-evaluation","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":160.2,"error_type":null},{"name":"protein-sequence","composer2":0.0,"oracle":0.0,"status":"fail","note":"","exec_time_secs":462.4,"error_type":null},{"name":"publisher-market-analysis","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":225.7,"error_type":null},{"name":"publisher-market-analysis-v2","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":295.0,"error_type":null},{"name":"python-api-rate-limit","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":226.2,"error_type":null},{"name":"raft-log-repair-concurrent-access","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":425.4,"error_type":null},{"name":"react-typescript-debugg","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":364.0,"error_type":null},{"name":"reproducibility-and-envsetup","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":180.8,"error_type":null},{"name":"reverse-engineer-stack-vm","composer2":null,"oracle":1.0,"status":"error","note":"","exec_time_secs":800.0,"error_type":"AgentTimeoutError"},{"name":"rsa-jwt-token-api-redis-blacklist","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":336.6,"error_type":null},{"name":"sakila-sqlite-queries","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":244.5,"error_type":null},{"name":"sales-data-csv-analysis","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":185.7,"error_type":null},{"name":"scan-linux-persistence-artifacts","composer2":null,"oracle":1.0,"status":"error","note":"","exec_time_secs":900.0,"error_type":"AgentTimeoutError"},{"name":"schedule-vacation","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":132.5,"error_type":null},{"name":"security-breach-incident-response","composer2":0.783,"oracle":0.75,"status":"partial","note":"","exec_time_secs":149.8,"error_type":null},{"name":"security-incident-log-analysis","composer2":0.882,"oracle":0.922,"status":"partial","note":"","exec_time_secs":98.8,"error_type":null},{"name":"server-log-analysis","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":142.7,"error_type":null},{"name":"service-deployment-wave-planner","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":393.3,"error_type":null},{"name":"sign-vector-game","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":89.4,"error_type":null},{"name":"simple-database-query-tool","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":150.5,"error_type":null},{"name":"smiles-data-lab","composer2":0.0,"oracle":0.0,"status":"fail","note":"","exec_time_secs":64.5,"error_type":null},{"name":"sql-injection-forensics","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":239.0,"error_type":null},{"name":"submission_a63937a5_20251224_152124","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":358.8,"error_type":null},{"name":"supply-chain-fulfillment","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":225.8,"error_type":null},{"name":"symlink-chain-traversal","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":288.5,"error_type":null},{"name":"sympy-bug-fix","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":290.0,"error_type":null},{"name":"systemd-log-monitoring","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":429.0,"error_type":null},{"name":"task-xxe-exploit","composer2":1.0,"oracle":1.0,"status":"pass","note":"","exec_time_secs":101.0,"error_type":null},{"name":"todos-api","composer2":null,"oracle":1.0,"status":"error","note":"","exec_time_secs":500.1,"error_type":"AgentTimeoutError"},{"name":"token-auth-websocket","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":594.4,"error_type":null},{"name":"tsl-test-case-generation","composer2":0.83,"oracle":0.883,"status":"partial","note":"","exec_time_secs":541.0,"error_type":null},{"name":"vimscript-vim-quine","composer2":0.0,"oracle":1.0,"status":"fail","note":"Regression","exec_time_secs":873.7,"error_type":null},{"name":"word-derangement-mapping","composer2":1.0,"oracle":0.0,"status":"pass","note":"Agent solved (no oracle)","exec_time_secs":362.7,"error_type":null}]};
+  const { summary, leaderboard, tasks } = data;
+
+  // ── Hero ──
+  document.getElementById('hero-score').innerHTML =
+    `${(summary.mean_reward * 100).toFixed(1)}<span class="pct">%</span>`;
+  document.getElementById('hero-model').textContent = summary.model;
+  document.getElementById('hero-dataset').textContent =
+    `${summary.dataset} \u00b7 ${summary.total_tasks} tasks \u00b7 ${summary.framework}`;
+
+  const statsEl = document.getElementById('hero-stats');
+  const heroStats = [
+    { value: `${summary.pass_rate}%`, label: 'Pass Rate' },
+    { value: `${summary.perfect}`, label: 'Perfect Scores' },
+    { value: `${summary.scored}`, label: 'Scored' },
+    { value: `${summary.errors}`, label: 'Errors' },
+  ];
+  statsEl.innerHTML = heroStats.map(s => `
+    <div class="hero-stat">
+      <div class="hero-stat-value">${s.value}</div>
+      <div class="hero-stat-label">${s.label}</div>
+    </div>
+  `).join('');
+
+  // ── Leaderboard ──
+  const lbEl = document.getElementById('leaderboard-list');
+  const maxScore = Math.max(...leaderboard.map(l => l.tblite));
+  lbEl.innerHTML = leaderboard.map((l, i) => `
+    <div class="lb-row ${l.ours ? 'ours' : ''}">
+      <div class="lb-rank">${i + 1}</div>
+      <div class="lb-model">
+        ${l.model}
+        <span class="agent-note">${l.note}</span>
+      </div>
+      <div class="lb-bar-wrap">
+        <div class="lb-bar" style="width: ${(l.tblite / maxScore * 100).toFixed(1)}%"></div>
+      </div>
+      <div class="lb-score">${l.tblite.toFixed(1)}%</div>
+    </div>
+  `).join('');
+
+  // ── Distribution ──
+  const distEl = document.getElementById('dist-container');
+  const total = summary.perfect + summary.partial + summary.zero + summary.errors;
+  distEl.innerHTML = `
+    <div class="dist-bar-wrap">
+      <div class="dist-bar">
+        <div class="dist-segment" data-type="perfect" style="flex:${summary.perfect}" title="${summary.perfect} perfect"></div>
+        <div class="dist-segment" data-type="partial" style="flex:${summary.partial}" title="${summary.partial} partial"></div>
+        <div class="dist-segment" data-type="zero" style="flex:${summary.zero}" title="${summary.zero} zero"></div>
+        <div class="dist-segment" data-type="error" style="flex:${summary.errors}" title="${summary.errors} errors"></div>
+      </div>
+    </div>
+    <div class="dist-legend">
+      <div class="dist-legend-item"><div class="dist-dot perfect"></div> Perfect (1.0) <span class="dist-legend-value">${summary.perfect}</span></div>
+      <div class="dist-legend-item"><div class="dist-dot partial"></div> Partial (0&lt;r&lt;1) <span class="dist-legend-value">${summary.partial}</span></div>
+      <div class="dist-legend-item"><div class="dist-dot zero"></div> Zero (0.0) <span class="dist-legend-value">${summary.zero}</span></div>
+      <div class="dist-legend-item"><div class="dist-dot error"></div> Timeout Error <span class="dist-legend-value">${summary.errors}</span></div>
+    </div>
+  `;
+
+  // ── Timing ──
+  const timingEl = document.getElementById('timing-grid');
+  const t = summary.timing;
+  const timingStats = [
+    { value: `${t.min}s`, label: 'Minimum' },
+    { value: `${t.p50}s`, label: 'P50 (Median)' },
+    { value: `${t.mean}s`, label: 'Mean' },
+    { value: `${t.p90}s`, label: 'P90' },
+    { value: `${t.p95}s`, label: 'P95' },
+    { value: `${t.max}s`, label: 'Maximum' },
+  ];
+  timingEl.innerHTML = timingStats.map(s => `
+    <div class="stat-card">
+      <div class="stat-card-value">${s.value}</div>
+      <div class="stat-card-label">${s.label}</div>
+    </div>
+  `).join('');
+
+  // ── Methodology ──
+  const methodEl = document.getElementById('method-grid');
+  const methods = [
+    { label: 'Framework', value: '<code>Harbor v0.1.45</code>' },
+    { label: 'Agent', value: '<code>cursor-cli</code> with <code>--model cursor/composer-2</code>' },
+    { label: 'Environment', value: 'Local Docker containers (Linux 6.17.0)' },
+    { label: 'Concurrency', value: '4 concurrent trials' },
+    { label: 'Attempts', value: '1 attempt per task, no retries' },
+    { label: 'Dataset', value: 'OpenThoughts-TBLite v2.0 (100 tasks)' },
+  ];
+  methodEl.innerHTML = methods.map(m => `
+    <div class="method-item">
+      <div class="method-label">${m.label}</div>
+      <div class="method-value">${m.value}</div>
+    </div>
+  `).join('');
+
+  // ── Table ──
+  const filters = ['all', 'pass', 'partial', 'fail', 'error'];
+  const controlsEl = document.getElementById('table-controls');
+  controlsEl.innerHTML = filters.map(f => `
+    <button class="filter-btn ${f === 'all' ? 'active' : ''}" data-filter="${f}">
+      ${f === 'all' ? 'All (100)' :
+        f === 'pass' ? `Pass (${tasks.filter(t=>t.status==='pass').length})` :
+        f === 'partial' ? `Partial (${tasks.filter(t=>t.status==='partial').length})` :
+        f === 'fail' ? `Fail (${tasks.filter(t=>t.status==='fail').length})` :
+        `Error (${tasks.filter(t=>t.status==='error').length})`}
+    </button>
+  `).join('');
+
+  let currentFilter = 'all';
+  let sortKey = 'name';
+  let sortDir = 1;
+
+  const columns = [
+    { key: 'name', label: 'Task Name' },
+    { key: 'composer2', label: 'Composer 2' },
+    { key: 'oracle', label: 'Oracle' },
+    { key: 'status', label: 'Status' },
+    { key: 'exec_time_secs', label: 'Time' },
+    { key: 'note', label: 'Notes' },
+  ];
+
+  const headEl = document.getElementById('table-head');
+  headEl.innerHTML = '<tr>' + columns.map(c =>
+    `<th data-sort="${c.key}" class="${sortKey === c.key ? 'sorted' : ''}">
+      ${c.label}<span class="sort-arrow">${sortKey === c.key ? (sortDir === 1 ? '\u25b2' : '\u25bc') : '\u25b2'}</span>
+    </th>`
+  ).join('') + '</tr>';
+
+  function formatScore(val) {
+    if (val === null || val === undefined) return { text: '\u2014', cls: 'null' };
+    if (val === 1.0) return { text: '1.000', cls: 'perfect' };
+    if (val === 0.0) return { text: '0.000', cls: 'zero' };
+    return { text: val.toFixed(3), cls: 'partial' };
+  }
+
+  function formatTime(secs) {
+    if (!secs) return '\u2014';
+    if (secs >= 60) return `${Math.floor(secs/60)}m ${Math.round(secs%60)}s`;
+    return `${secs.toFixed(1)}s`;
+  }
+
+  function renderTable() {
+    let filtered = currentFilter === 'all' ? [...tasks] : tasks.filter(t => t.status === currentFilter);
+
+    filtered.sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (av === null || av === undefined) av = -999;
+      if (bv === null || bv === undefined) bv = -999;
+      if (typeof av === 'string') return sortDir * av.localeCompare(bv);
+      return sortDir * (av - bv);
+    });
+
+    const bodyEl = document.getElementById('table-body');
+    bodyEl.innerHTML = filtered.map(t => {
+      const c2 = formatScore(t.composer2);
+      const or = formatScore(t.oracle);
+      const badgeCls = `badge-${t.status}`;
+      return `<tr>
+        <td class="task-name">${t.name}</td>
+        <td class="score-cell ${c2.cls}">${c2.text}</td>
+        <td class="score-cell ${or.cls}">${or.text}</td>
+        <td><span class="badge ${badgeCls}">${t.status}</span></td>
+        <td class="time-cell">${formatTime(t.exec_time_secs)}</td>
+        <td class="note-cell">${t.note || ''}</td>
+      </tr>`;
+    }).join('');
+
+    // Update header sort indicators
+    headEl.innerHTML = '<tr>' + columns.map(c =>
+      `<th data-sort="${c.key}" class="${sortKey === c.key ? 'sorted' : ''}">
+        ${c.label}<span class="sort-arrow">${sortKey === c.key ? (sortDir === 1 ? '\u25b2' : '\u25bc') : '\u25b2'}</span>
+      </th>`
+    ).join('') + '</tr>';
+
+    // Re-attach sort handlers
+    headEl.querySelectorAll('th').forEach(th => {
+      th.addEventListener('click', () => {
+        const key = th.dataset.sort;
+        if (sortKey === key) { sortDir *= -1; }
+        else { sortKey = key; sortDir = 1; }
+        renderTable();
+      });
+    });
+  }
+
+  // Filter handlers
+  controlsEl.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      controlsEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderTable();
+    });
+  });
+
+  renderTable();
+})();
+</script>
+
+</body>
+</html>
